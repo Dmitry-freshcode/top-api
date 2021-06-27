@@ -10,7 +10,9 @@ import {
 } from '@nestjs/common';
 import { FindTopPageDto } from './dto/find-top-page.dto';
 import { TopPageModel } from './top-page.model';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('top-page')
 @Controller('top-page')
 export class TopPageController {
   @Post('create')

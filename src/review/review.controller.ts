@@ -1,6 +1,8 @@
 import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { ReviewModel } from './review.model';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('review')
 @Controller('review')
 export class ReviewController {
   @Post('create')

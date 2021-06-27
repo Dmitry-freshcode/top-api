@@ -10,7 +10,9 @@ import {
 } from '@nestjs/common';
 import { ProductModel } from './product.model';
 import { FindProductDto } from './dto/find-product.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('product')
 @Controller('product')
 export class ProductController {
   @Post('create')
