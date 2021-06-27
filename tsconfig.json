@@ -14,5 +14,6 @@
     "strict": true,
     "strictPropertyInitialization": false,
     "skipLibCheck": true,
+    //"noImplicitAny": false,
   }
 }
