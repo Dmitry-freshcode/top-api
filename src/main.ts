@@ -11,6 +11,7 @@ async function bootstrap() {
     .setDescription('The top-page API description')
     .setVersion('1.0')
     .addTag('top-page')
+    .addBearerAuth({ type: 'http' }, 'web')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api/swagger', app, document);

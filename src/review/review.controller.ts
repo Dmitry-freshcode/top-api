@@ -12,6 +12,8 @@ import { ApiTags } from '@nestjs/swagger';
 import { CreateReviewDto } from './dto/create-review.dto';
 import { ReviewService } from './review.service';
 import { REVIEW_NOT_FOUND } from './review.constants';
+import { AuthGuard } from '../auth/guards/auth.guard';
+import { UserEmail } from '../decorators/user-email.decorator';
 
 @ApiTags('review')
 @Controller('review')
@@ -24,6 +26,7 @@ export class ReviewController {
   }
 
   @Delete(':id')
+  @AuthGuard()
   async delete(@Param('id') id: string) {
     const deletedDoc = await this.reviewService.delete(id);
     if (!deletedDoc) {
@@ -32,7 +35,10 @@ export class ReviewController {
   }
 
   @Get('byProduct/:productId')
-  async getByProduct(@Param('productId') productId: string) {
+  async getByProduct(
+    @Param('productId') productId: string,
+    @UserEmail() email: string,
+  ) {
     return this.reviewService.findByProductId(productId);
   }
 }

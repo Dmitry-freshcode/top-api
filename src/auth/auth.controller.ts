@@ -5,7 +5,7 @@ import {
   HttpCode,
   Post,
 } from '@nestjs/common';
-import { ApiBody, ApiTags } from '@nestjs/swagger';
+import { ApiTags } from '@nestjs/swagger';
 import { AuthDto } from './dto/auth.dto';
 import { AuthService } from './auth.service';
 import { ALREADY_REGISTERED_USER } from './auth.constants';
