@@ -4,7 +4,6 @@ import {
   Delete,
   Get,
   HttpCode,
-  HttpException,
   NotFoundException,
   Param,
   Patch,
@@ -17,11 +16,14 @@ import { CreateProductDto } from './dto/create-product.dto';
 import { ProductService } from './product.service';
 import { NOT_FOUND_PRODUCT } from './product.constants';
 import { AdValidationPipe } from 'src/pipes/ad-validation.pipe';
+import { AuthGuard } from '../auth/guards/auth.guard';
 
 @ApiTags('product')
 @Controller('product')
 export class ProductController {
   constructor(private readonly productService: ProductService) {}
+
+  @AuthGuard()
   @Post('create')
   async create(@Body() dto: CreateProductDto) {
     return this.productService.creat(dto);
@@ -36,6 +38,7 @@ export class ProductController {
     return product;
   }
 
+  @AuthGuard()
   @Delete(':id')
   async delete(@Param('id', AdValidationPipe) id: string) {
     const deletedProduct = await this.productService.deleteById(id);
@@ -44,6 +47,7 @@ export class ProductController {
     }
   }
 
+  @AuthGuard()
   @Patch(':id')
   async patch(
     @Param('id', AdValidationPipe) id: string,
