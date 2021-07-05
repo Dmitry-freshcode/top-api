@@ -27,7 +27,6 @@ export class TopPageController {
     return this.topPageService.creat(dto);
   }
 
-
   @Get(':id')
   async get(@Param('id') id: string) {
     const topPage = await this.topPageService.findById(id);
