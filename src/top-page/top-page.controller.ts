@@ -11,12 +11,13 @@ import {
 import { FindTopPageDto } from './dto/find-top-page.dto';
 import { TopPageModel } from './top-page.model';
 import { ApiTags } from '@nestjs/swagger';
+import { CreateTopPageDto } from './dto/create-top-page.dto';
 
 @ApiTags('top-page')
 @Controller('top-page')
 export class TopPageController {
   @Post('create')
-  async create(@Body() dto: Omit<TopPageModel, '_id'>) {}
+  async create(@Body() dto: CreateTopPageDto) {}
 
   @Get(':id')
   async get(@Param('id') id: string) {}

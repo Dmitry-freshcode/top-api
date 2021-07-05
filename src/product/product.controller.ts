@@ -16,6 +16,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { CreateProductDto } from './dto/create-product.dto';
 import { ProductService } from './product.service';
 import { NOT_FOUND_PRODUCT } from './product.constants';
+import { AdValidationPipe } from 'src/pipes/ad-validation.pipe';
 
 @ApiTags('product')
 @Controller('product')
@@ -27,7 +28,7 @@ export class ProductController {
   }
 
   @Get(':id')
-  async get(@Param('id') id: string): Promise<ProductModel> {
+  async get(@Param('id', AdValidationPipe) id: string): Promise<ProductModel> {
     const product = await this.productService.findById(id);
     if (!product) {
       throw new NotFoundException(NOT_FOUND_PRODUCT);
@@ -36,7 +37,7 @@ export class ProductController {
   }
 
   @Delete(':id')
-  async delete(@Param('id') id: string) {
+  async delete(@Param('id', AdValidationPipe) id: string) {
     const deletedProduct = await this.productService.deleteById(id);
     if (!deletedProduct) {
       throw new NotFoundException(NOT_FOUND_PRODUCT);
@@ -45,7 +46,7 @@ export class ProductController {
 
   @Patch(':id')
   async patch(
-    @Param('id') id: string,
+    @Param('id', AdValidationPipe) id: string,
     @Body() dto: ProductModel,
   ): Promise<ProductModel> {
     const updatedProduct = await this.productService.updateById(id, dto);
