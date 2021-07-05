@@ -14,6 +14,7 @@ import { ReviewService } from './review.service';
 import { REVIEW_NOT_FOUND } from './review.constants';
 import { AuthGuard } from '../auth/guards/auth.guard';
 import { UserEmail } from '../decorators/user-email.decorator';
+import { AdValidationPipe } from 'src/pipes/ad-validation.pipe';
 
 @ApiTags('review')
 @Controller('review')
@@ -27,7 +28,7 @@ export class ReviewController {
 
   @Delete(':id')
   @AuthGuard()
-  async delete(@Param('id') id: string) {
+  async delete(@Param('id', AdValidationPipe) id: string) {
     const deletedDoc = await this.reviewService.delete(id);
     if (!deletedDoc) {
       throw new HttpException(REVIEW_NOT_FOUND, HttpStatus.NOT_FOUND);
@@ -36,7 +37,7 @@ export class ReviewController {
 
   @Get('byProduct/:productId')
   async getByProduct(
-    @Param('productId') productId: string,
+    @Param('productId', AdValidationPipe) productId: string,
     @UserEmail() email: string,
   ) {
     return this.reviewService.findByProductId(productId);
