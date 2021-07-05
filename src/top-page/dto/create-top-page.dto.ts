@@ -12,6 +12,7 @@ import { HhDataDto } from './hhdata.dto';
 import { TopPageAdvantageDto } from './advantage.dto';
 
 export class CreateTopPageDto {
+
   @ApiProperty()
   @IsEnum(TopLevelCategory)
   firstCategory: TopLevelCategory;
