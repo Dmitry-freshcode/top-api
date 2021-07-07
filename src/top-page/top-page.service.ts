@@ -10,6 +10,7 @@ export class TopPageService {
     @InjectModel(TopPageModel)
     private readonly productModel: ModelType<TopPageModel>,
   ) {}
+
   async creat(dto: CreateTopPageDto) {
     return this.productModel.create(dto);
   }

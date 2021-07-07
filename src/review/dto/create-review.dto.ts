@@ -14,8 +14,8 @@ export class CreateReviewDto {
   @IsString()
   description: string;
   @ApiProperty()
-  @Max(5)
-  @Min(1, { message: 'Тест сообщения о ошибке' })
+  @Max(5, { message: 'rating maximum count 5' })
+  @Min(1, { message: 'rating minimum count 1' })
   @IsNumber()
   rating: number;
   @ApiProperty()
